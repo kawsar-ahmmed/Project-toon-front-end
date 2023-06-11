@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 const AddUser = () => {
     const [user, setUser] = useState([]);
     useEffect(() => {
-        fetch('http://127.0.0.1:5001/users')
+        fetch('http://127.0.0.1:5001/user')
             .then(res => res.json())
             .then(data => setUser(data))
     }, [])
@@ -14,8 +14,7 @@ const AddUser = () => {
         const name = event.target.name.value;
         const email = event.target.email.value;
         const user = { name, email }
-        console.log(user);
-        fetch('http://127.0.0.1:5001/users', {
+        fetch('http://127.0.0.1:5001/user', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -24,7 +23,9 @@ const AddUser = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                console.log('Success', data)
+                alert("User Added Successfully");
+                event.target.reset();
             })
     }
 
@@ -40,8 +41,8 @@ const AddUser = () => {
             <div className="user-main">
                 {
                     user.map(item =>
-                        <ul key={item.id}>
-                            <li> Name: {item.name}, Email: {item.email}, ID: {item.id}  </li>
+                        <ul key={item._id}>
+                            <li> Name: {item.name}, Email: {item.email}, ID: {item._id}  </li>
                         </ul>
                     )
                 }
