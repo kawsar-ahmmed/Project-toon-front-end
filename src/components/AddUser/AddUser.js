@@ -1,14 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const AddUser = () => {
-    const [user, setUser] = useState([]);
-    useEffect(() => {
-        fetch('http://127.0.0.1:5001/user')
-            .then(res => res.json())
-            .then(data => setUser(data))
-    }, [])
-    console.log(user)
-
+  
     const handleAddUser = event => {
         event.preventDefault();
         const name = event.target.name.value;
@@ -39,13 +32,6 @@ const AddUser = () => {
                 <button className='py-4 px-8 ba bg-slate-400 text-yellow-50 my-2'>Add user</button>
             </form>
             <div className="user-main">
-                {
-                    user.map(item =>
-                        <ul key={item._id}>
-                            <li> Name: {item.name}, Email: {item.email}, ID: {item._id}  </li>
-                        </ul>
-                    )
-                }
             </div>
         </div>
     );
